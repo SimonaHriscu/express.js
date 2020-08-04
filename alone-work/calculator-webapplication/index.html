@@ -7,8 +7,15 @@
 </head>
 <body>
     <h1>Calculator</h1>
-    <form action="/" method="POST">
+    <form action="/calculator" method="POST">
         <input type="text" placeholder="First number" name="num1">
+        <select name="select" id="select">
+            <option value="default">Select</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
         <input type="text" placeholder="Second number" name="num2">
         <button type="submit" name="submit">Calculate</button>
     </form>
