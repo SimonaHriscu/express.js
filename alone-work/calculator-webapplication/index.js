@@ -5,7 +5,7 @@ const port = 3000;
 
 // Home
 app.get("/", (req, res) => {
-res.send(`Choose between '/calculator' or '/bmicalculator' in the URL`)
+  res.send(`Choose between '/calculator' or '/bmicalculator' in the URL`);
 });
 
 app.use(bodyParser.urlencoded({ extended: true })); // extended posts nested obj
@@ -32,8 +32,7 @@ app.post("/calculator", (req, res) => {
     case "/":
       result = num1 / num2;
       break;
-
-}
+  }
   res.send(`The result is ${result}`);
 });
 
@@ -57,7 +56,8 @@ app.post("/bmicalculator", (req, res) => {
     status = "Obese";
   }
   res.send(
-    `Your BMI is: <span style="font-weight: bold; font-size: 1.2rem">${bmi}</span>, your Weight Status is: <span style="font-weight: bold ; color: red; font-size: 1.2rem">${status}</span>`);
+    `Your BMI is: <span style="font-weight: bold; font-size: 1.2rem">${bmi}</span>, your Weight Status is: <span style="font-weight: bold ; color: red; font-size: 1.2rem">${status}</span>`
+  );
 });
 app.listen(port, () => {
   console.log(`Listening to localhost:${port}`);
