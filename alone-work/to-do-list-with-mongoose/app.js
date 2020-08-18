@@ -1,5 +1,4 @@
-//jshint esversion:6
-
+// sudo pkill node - for when the server does not work
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -14,6 +13,7 @@ app.use(express.static('public'));
 
 mongoose.connect('mongodb://localhost:27017/todolistDB', {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 //new Schema
 const itemsSchema = new mongoose.Schema({
@@ -121,6 +121,16 @@ app.post('/delete', (req, res) => {
       }
     });
   } else {
+    //List.findOneAndUpdate({},{},callback)
+    List.findOneAndUpdate(
+      { name: listName },
+      { $pull: { items: { _id: checkedItemId } } },
+      function (err, foundList) {
+        if (!err) {
+          res.redirect('/' + listName);
+        }
+      }
+    );
   }
 });
 
