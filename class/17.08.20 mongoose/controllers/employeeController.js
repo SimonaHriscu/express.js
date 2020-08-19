@@ -22,6 +22,7 @@ const getEmployee = async (req, res, next) => {
 const getAdd = async (req, res, next) => {
   let employee;
   try {
+    // employee = await EmployeesData.find({ add: req.params.add }).limit(70);
     employee = await EmployeesData.find({ add: req.params.add });
     if (employee == null)
       return res.status(404).json({ message: 'employee NOT Found' });
@@ -89,6 +90,37 @@ const deleteOneEmployee = async (req, res) => {
     });
   }
 };
+const updateAllEmployeeData = async (req, res) => {
+  try {
+    await EmployeesData.update(
+      { name: req.params.name },
+      {
+        $set: {
+          name: req.body.name,
+          age: req.body.age,
+          add: req.body.add,
+        },
+      }
+    );
+    res.status(200).json({ message: 'Employee Updated' });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+const updateManyEmployees = async (req, res) => {
+  try {
+    await EmployeesData.updateMany(
+      { add: req.params.add },
+      {
+        $set: { add: req.body.add },
+      }
+    );
+    res.status(200).json({ message: 'Add got update' });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getEmployee,
   getAdd,
@@ -97,4 +129,6 @@ module.exports = {
   getOneEmployee,
   addNewEmployee,
   deleteOneEmployee,
+  updateAllEmployeeData,
+  updateManyEmployees,
 };
