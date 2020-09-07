@@ -36,7 +36,7 @@ const addOne = async (req, res) => {
     authorName: req.body.name,
   });
   req.body.books.map((book) =>
-    author.books.push({ title: book.title, issueYear: book.issueYear })
+    author.books.push({ title: book.title, issueYear: book.year })
   );
   try {
     const newAuthor = await author.save();
